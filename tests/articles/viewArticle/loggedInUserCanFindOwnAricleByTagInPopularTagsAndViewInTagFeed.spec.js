@@ -19,11 +19,11 @@ test('Logged-in user can find own article by Tag from the' +
   await internalHomePage.open();
   await internalHomePage.popularTags.assertSidebarVisible();
   await internalHomePage.popularTags
-    .assertTagIsVisible(articleWithOneTag.title, articleWithOneTag.tags[0]);
+    .assertTagIsVisible(articleWithOneTag.tags[0]);
   await internalHomePage.popularTags
-    .assertTagClickable(articleWithOneTag.title, articleWithOneTag.tags[0]);
+    .assertTagClickable(articleWithOneTag.tags[0]);
   await internalHomePage.popularTags
-    .clickTag(articleWithOneTag.title, articleWithOneTag.tags[0]);
+    .clickTag(articleWithOneTag.tags[0]);
 
   await internalHomePage.tagFeedTab
     .assertTabLinkVisible(articleWithOneTag.tags[0]);
