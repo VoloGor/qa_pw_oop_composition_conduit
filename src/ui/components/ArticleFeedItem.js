@@ -3,10 +3,8 @@ import { expect } from '../../common/helpers/pw';
 
 export class ArticleFeedItem extends BaseComponent {
   articleCard(title) {
-    return this.page.locator('.article-preview').filter({
-      has: this.page.getByRole('heading', { name: `Article title: ${title}` }),
-    });
-  }
+  return this.page.locator('.article-preview').filter({ hasText: title });
+}
 
   articleTitle(title) {
     return this.articleCard(title).locator('h1');

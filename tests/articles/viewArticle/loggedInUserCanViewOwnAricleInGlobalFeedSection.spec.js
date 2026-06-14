@@ -19,12 +19,13 @@ test('Logged-in user can view own article in the Global Feed section', async ({
   await internalHomePage.globalFeed.open();
 
   await internalHomePage
-    .articleFeedItem
+    .globalFeed
     .assertArticleTitleIsVisible(articleWithoutTags.title);
   await internalHomePage
-    .articleFeedItem
-    .assertArticleTextIsVisible(articleWithoutTags.text);
+    .globalFeed
+    .assertArticleDescriptionIsVisible(articleWithoutTags.title, 
+      articleWithoutTags.description);
   await internalHomePage
-    .articleFeedItem
-    .assertArticleAuthorNameIsVisible(user.username);
+    .globalFeed
+    .assertArticleAuthorNameIsVisible(articleWithoutTags.title, user.username);
 });

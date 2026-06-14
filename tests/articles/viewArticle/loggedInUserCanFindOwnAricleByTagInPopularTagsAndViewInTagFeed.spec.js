@@ -19,11 +19,11 @@ test('Logged-in user can find own article by Tag from the' +
   await internalHomePage.open();
   await internalHomePage.popularTags.assertSidebarVisible();
   await internalHomePage.popularTags
-    .assertTagIsVisible(articleWithOneTag.tags[0]);
+    .assertTagIsVisible(articleWithOneTag.title, articleWithOneTag.tags[0]);
   await internalHomePage.popularTags
-    .assertTagClickable(articleWithOneTag.tags[0]);
+    .assertTagClickable(articleWithOneTag.title, articleWithOneTag.tags[0]);
   await internalHomePage.popularTags
-    .clickTag(articleWithOneTag.tags[0]);
+    .clickTag(articleWithOneTag.title, articleWithOneTag.tags[0]);
 
   await internalHomePage.tagFeedTab
     .assertTabLinkVisible(articleWithOneTag.tags[0]);
@@ -32,8 +32,9 @@ test('Logged-in user can find own article by Tag from the' +
     .assertArticleTitleIsVisible(articleWithOneTag.title)
 
   await internalHomePage.tagFeedTab
-    .assertArticleDescriptionIsVisible(articleWithOneTag.description)
+    .assertArticleDescriptionIsVisible(articleWithOneTag.title,
+      articleWithOneTag.description)
 
   await internalHomePage.tagFeedTab
-    .assertArticleAuthorNameIsVisible(user.username)
+    .assertArticleAuthorNameIsVisible(articleWithOneTag.title, user.username)
 });
