@@ -2,25 +2,23 @@ import { BaseComponent } from './BaseComponent';
 import { expect } from '../../common/helpers/pw';
 import { ArticleFeedItem } from './ArticleFeedItem';
 
-export class GlobalFeedTab extends BaseComponent {
-  #globalFeedLink;
+export class TagFeedTab extends BaseComponent {
   #articleFeedItem;
 
   constructor(page, userId = 0) {
     super(page, userId);
-    this.#globalFeedLink = this.page.getByText('Global Feed');
     this.#articleFeedItem = new ArticleFeedItem(page, userId);
   }
 
-  async open() {
-    await this.step(`Open 'Global Feed' tab`, async () => {
-      await this.#globalFeedLink.click();
+  getTagFeedLink(tagName) {
+    return this.page.locator('.feed-toggle .nav-link.active', {
+      hasText: tagName,
     });
   }
 
-  async assertTabLinkVisible() {
-    await this.step(`Assert 'Global Feed' link is visible`, async () => {
-      await expect(this.#globalFeedLink).toBeVisible();
+  async assertTabLinkVisible(tagName) {
+    await this.step(`Assert 'Tag Feed' link is visible`, async () => {
+      await expect(this.getTagFeedLink(tagName)).toBeVisible();
     });
   }
   async assertArticleTitleIsVisible(title) {
@@ -35,9 +33,5 @@ export class GlobalFeedTab extends BaseComponent {
   async assertArticleAuthorNameIsVisible(title, authorName) {
     await this.#articleFeedItem
       .assertArticleAuthorNameIsVisible(title, authorName);
-  }
-
-  async clickArticleTitle(title) {
-    await this.#articleFeedItem.clickArticleTitle(title);
   }
 }
